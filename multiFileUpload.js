@@ -16,5 +16,5 @@ const fileFilter = (req,file, callback) => {
   callback(null, true)
 }
 
-const uploads = multer({storage, fileFilter}).single('file');
+const uploads = multer({storage, fileFilter}).array('fisingleles', 5);
 module.exports = uploads

@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const cors = require('cors');
-const singleFileUpload = require('./single')
+const singleFileUpload = require('./singleUpload');
+const multiFileUpload = require('./multiFileUpload');
 
 
 app.use(bodyParser.urlencoded({extended:false}));
@@ -23,6 +24,20 @@ app.post('/singleFileUpload', (req, res, next) => {
         console.log("error", err)
       } else {
         res.json(req,file).status(200);
+      }
+    });
+  } catch (error) {
+    console.log('Bir hata oluştu');
+  }
+})
+
+app.post('/fileUpload', (req, res, next) => {
+  try {
+    multiFileUpload(req, res, ()=> {
+      if(err) {
+        console.log("error", err)
+      } else {
+        res.json(req,files).status(200);
       }
     });
   } catch (error) {
